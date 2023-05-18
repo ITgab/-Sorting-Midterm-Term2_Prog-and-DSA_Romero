@@ -176,30 +176,33 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
                     if (ArrListCategories[x].Count == 0)
                         Console.WriteLine(Categories[x] + " category finished sorting...!");
 
+                    Console.WriteLine();
+
+                    for (int i = 0; i < SortedIdx.Count; i++)
+                    {
+                        foreach (KeyValuePair<int, List<string>> kvp in items)
+                        {
+                            if (SortedIdx[x] == kvp.Key)
+                            {
+                                foreach (string item in kvp.Value)
+                                {
+                                    Console.Write(item + ", ");
+                                }
+                                Console.WriteLine();
+                            }
+                        }
+                    }
+
                     //for (int i = 0; i < SortedIdx.Count; i++) //SortedIdx is a key
                     //{
                     //    Console.WriteLine(items[SortedIdx[i]]);
                     //}
 
                     //OutFile = OutDir + sortingType[sortOpt]; HOW TO DO THE FOLDER FILE PATH THINGY
-                    using (StreamWriter sw = new StreamWriter(Categories[x] + ".txt", append)) //make a txt file 
-                    {
-                        for (int i = 0; i < SortedIdx.Count; i++)
-                        {
-                            foreach (KeyValuePair<int, List<string>> kvp in items)
-                            {
-                                if (SortedIdx[x] == kvp.Key)
-                                {
-                                    sw.Write(kvp.Key + "--");
-                                    foreach (string value in kvp.Value)
-                                    {
-                                        sw.Write(value + "--");
-                                    }
-                                    sw.WriteLine();
-                                }
-                            }
-                        }
-                    }
+                    //using (StreamWriter sw = new StreamWriter(Categories[x] + ".txt", append)) //make a txt file 
+                    //{
+
+                    //}
                 }
             }
 
