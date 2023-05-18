@@ -38,11 +38,12 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
             int number = 0;
             List<int> SortedIdx = new List<int>();
 
+            int tempValue = 0;
+
             //OutDir declarations
             string OutDir = "";
             string OutFile = "";
             bool append = true;
-            List<string> sortingType = new List<string> { "0", "rating", "rating count", "price", "0"};
 
 
             //read [Setup]
@@ -109,14 +110,14 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
             Console.WriteLine("There are {0} categories", Categories.Count);
             Console.WriteLine("The program will segregate the files per category.");
 
-            List<int>[] ArrListCategories = new List<int>[Categories.Count]; // array of 27 lists
+            List<int>[] ArrListCategories = new List<int>[Categories.Count]; 
             for (int x = 0; x < ArrListCategories.Length; x++)
-                ArrListCategories[x] = new List<int>(); // initialize lists
+                ArrListCategories[x] = new List<int>(); 
 
-            for (int x = 0; x < Categories.Count; x++) // index of ArrListCategories
-                for (int y = 0; y < items.Count; y++) // index of items dictionary
+            for (int x = 0; x < Categories.Count; x++) 
+                for (int y = 0; y < items.Count; y++) 
                     if (items[y][5] == Categories[x])
-                        ArrListCategories[x].Add(y); // stores the keys
+                        ArrListCategories[x].Add(y); 
 
             //program
             while (run)
@@ -131,74 +132,72 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
                 uInput = Console.ReadLine().ToLower();
                 Console.Clear();
 
-                if (uInput == "a") //rating
+                if (uInput == "a") 
                     sortOpt = 1;
-                else if (uInput == "b") //rating count
+                else if (uInput == "b") 
                     sortOpt = 2;
-                else if (uInput == "c") //price
+                else if (uInput == "c") 
                     sortOpt = 3;
-                else if (uInput == "d") //exit
+                else if (uInput == "d") 
                 {
                     run = false;
                     break;
                 }                    
-                else //invalid
+                else 
                 {
                     Console.WriteLine("Invalid input");
                     continue;
                 }
-                    
-                for (int x = 0; x < ArrListCategories.Count(); x++)
+
+                if (uInput == "a" || uInput == "b" || uInput == "c")
                 {
-                    SortedIdx.Clear();
-                    while (ArrListCategories[x].Count > 0)
+                    for (int x = 0; x < ArrListCategories.Count(); x++)
                     {
-                        maxNum = 1000000;
-                        idxToRemove = 0;
-                        for (int y = 0; y < ArrListCategories[x].Count; y++) //category
+                        SortedIdx.Clear();
+                        while (ArrListCategories[x].Count > 0)
                         {
-                            key = ArrListCategories[x][y]; //key of the actual item
-                            number = int.Parse(items[key][sortOpt]); //the value to be compared for sorting
-                            if (number < maxNum)
+                            maxNum = 1000000;
+                            idxToRemove = 0;
+                            for (int y = 0; y < ArrListCategories[x].Count; y++) 
                             {
-                                maxNum = number;
-                                idxToRemove = y;
-                            }
-                            else if (number == maxNum)
-                            {
-                                key = ArrListCategories[x][y - 1]; //prev
-                                idxToRemove = y - 1; //prev
-                            }
-                        }
-                        SortedIdx.Add(key);
-                        ArrListCategories[x].RemoveAt(idxToRemove);
-                    }
-                    if (ArrListCategories[x].Count == 0)
-                        Console.WriteLine(Categories[x] + " category finished sorting...!");
-
-                    Console.WriteLine();
-
-                    for (int i = 0; i < SortedIdx.Count; i++)
-                    {
-                        foreach (KeyValuePair<int, List<string>> kvp in items)
-                        {
-                            if (SortedIdx[x] == kvp.Key)
-                            {
-                                foreach (string item in kvp.Value)
+                                key = ArrListCategories[x][y]; 
+                                number = int.Parse(items[key][sortOpt]); 
+                                if (number < maxNum)
                                 {
-                                    Console.Write(item + ", ");
+                                    maxNum = number;
+                                    idxToRemove = y;
                                 }
-                                Console.WriteLine();
+                                else if (number == maxNum)
+                                {
+                                    key = ArrListCategories[x][y - 1]; 
+                                    idxToRemove = y - 1; 
+                                }
+                            }
+                            SortedIdx.Add(key);
+                            ArrListCategories[x].RemoveAt(idxToRemove);
+                        }
+                        if (ArrListCategories[x].Count == 0)
+                            Console.WriteLine(Categories[x] + " category finished sorting...!");
+
+                        for (int i = 0; i < SortedIdx.Count; i++)
+                        {
+                            foreach (KeyValuePair<int, List<string>> kvp in items)
+                            {
+                                OutFile = OutDir + Categories[x] + ".csv";
+                                using (StreamWriter sw = new StreamWriter(OutFile, append))
+                                {
+                                    if (SortedIdx[i] == kvp.Key)
+                                    {
+                                        foreach (string item in kvp.Value)
+                                        {
+                                            sw.Write(item + ", ");
+                                        }
+                                        sw.WriteLine();
+                                    }
+                                }
                             }
                         }
                     }
-
-
-                    //OutFile = OutDir + sortingType[sortOpt]; HOW TO DO THE FOLDER FILE PATH THINGY
-                    //using (StreamWriter sw = new StreamWriter(Categories[x] + ".txt", append)) //make a txt file 
-                    //{
-
-                    //}
                 }
             }
 
