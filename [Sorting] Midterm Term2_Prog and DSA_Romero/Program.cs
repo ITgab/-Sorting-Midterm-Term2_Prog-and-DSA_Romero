@@ -122,7 +122,7 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
             while (run)
             {
                 Console.WriteLine();
-                Console.WriteLine("How do you want the program to sort them by? (always in ascending order");
+                Console.WriteLine("How do you want the program to sort them by? (always in ascending order)");
                 Console.WriteLine("\t [a] rating");
                 Console.WriteLine("\t [b] rating count");
                 Console.WriteLine("\t [c] price");
@@ -176,30 +176,30 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
                     if (ArrListCategories[x].Count == 0)
                         Console.WriteLine(Categories[x] + " category finished sorting...!");
 
-                    for (int i = 0; i < SortedIdx.Count; i++) //SortedIdx is a key
-                    {
-                        Console.WriteLine(items[SortedIdx[i]]);
-                    }
+                    //for (int i = 0; i < SortedIdx.Count; i++) //SortedIdx is a key
+                    //{
+                    //    Console.WriteLine(items[SortedIdx[i]]);
+                    //}
 
                     //OutFile = OutDir + sortingType[sortOpt]; HOW TO DO THE FOLDER FILE PATH THINGY
-                    //using (StreamWriter sw = new StreamWriter(Categories[x] + ".txt", append)) //make a txt file 
-                    //{
-                    //    for (int i = 0; i < SortedIdx.Count; i++)
-                    //    {
-                    //        foreach (KeyValuePair<int, List<string>> kvp in items)
-                    //        {
-                    //            if (SortedIdx[x] == kvp.Key)
-                    //            {
-                    //                sw.Write(kvp.Key + "--");
-                    //                foreach (string value in kvp.Value)
-                    //                {
-                    //                    sw.Write(value + "--");
-                    //                }
-                    //                sw.WriteLine();
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                    using (StreamWriter sw = new StreamWriter(Categories[x] + ".txt", append)) //make a txt file 
+                    {
+                        for (int i = 0; i < SortedIdx.Count; i++)
+                        {
+                            foreach (KeyValuePair<int, List<string>> kvp in items)
+                            {
+                                if (SortedIdx[x] == kvp.Key)
+                                {
+                                    sw.Write(kvp.Key + "--");
+                                    foreach (string value in kvp.Value)
+                                    {
+                                        sw.Write(value + "--");
+                                    }
+                                    sw.WriteLine();
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
