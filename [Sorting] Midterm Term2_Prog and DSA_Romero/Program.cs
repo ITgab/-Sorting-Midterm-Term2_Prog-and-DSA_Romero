@@ -118,10 +118,6 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
                     if (items[y][5] == Categories[x])
                         ArrListCategories[x].Add(y); // stores the keys
 
-            List<int>[] SortedCategories = new List<int>[Categories.Count]; // array of 27 lists
-            for (int x = 0; x < ArrListCategories.Length; x++)
-                SortedCategories[x] = new List<int>(); //initialize lists
-
             //program
             while (run)
             {
