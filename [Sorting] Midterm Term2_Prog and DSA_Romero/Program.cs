@@ -110,10 +110,12 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
             Console.WriteLine("There are {0} categories", Categories.Count);
             Console.WriteLine("The program will segregate the files per category.");
 
+            //array of lists
             List<int>[] ArrListCategories = new List<int>[Categories.Count]; 
             for (int x = 0; x < ArrListCategories.Length; x++)
                 ArrListCategories[x] = new List<int>(); 
 
+            //grouping based on category
             for (int x = 0; x < Categories.Count; x++) 
                 for (int y = 0; y < items.Count; y++) 
                     if (items[y][5] == Categories[x])
@@ -162,15 +164,14 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
                             {
                                 key = ArrListCategories[x][y]; 
                                 number = int.Parse(items[key][sortOpt]); 
-                                if (number < maxNum)
+                                if (number <= maxNum)
                                 {
                                     maxNum = number;
                                     idxToRemove = y;
                                 }
-                                else if (number == maxNum)
+                                if (maxNum == 0)
                                 {
-                                    key = ArrListCategories[x][y - 1]; 
-                                    idxToRemove = y - 1; 
+                                    break;
                                 }
                             }
                             SortedIdx.Add(key);
