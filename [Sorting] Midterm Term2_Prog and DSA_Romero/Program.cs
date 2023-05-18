@@ -111,7 +111,7 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
 
             List<int>[] ArrListCategories = new List<int>[Categories.Count]; // array of 27 lists
             for (int x = 0; x < ArrListCategories.Length; x++)
-                ArrListCategories[x] = new List<int>(); //initialize lists
+                ArrListCategories[x] = new List<int>(); // initialize lists
 
             for (int x = 0; x < Categories.Count; x++) // index of ArrListCategories
                 for (int y = 0; y < items.Count; y++) // index of items dictionary
@@ -131,18 +131,18 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
                 uInput = Console.ReadLine().ToLower();
                 Console.Clear();
 
-                if (uInput == "a")
+                if (uInput == "a") //rating
                     sortOpt = 1;
-                else if (uInput == "b")
+                else if (uInput == "b") //rating count
                     sortOpt = 2;
-                else if (uInput == "c")
+                else if (uInput == "c") //price
                     sortOpt = 3;
-                else if (uInput == "d")
+                else if (uInput == "d") //exit
                 {
                     run = false;
                     break;
                 }                    
-                else
+                else //invalid
                 {
                     Console.WriteLine("Invalid input");
                     continue;
@@ -168,23 +168,38 @@ namespace _Sorting__Midterm_Term2_Prog_and_DSA_Romero
                             {
                                 key = ArrListCategories[x][y - 1]; //prev
                                 idxToRemove = y - 1; //prev
-                                y--;
                             }
                         }
                         SortedIdx.Add(key);
                         ArrListCategories[x].RemoveAt(idxToRemove);
                     }
                     if (ArrListCategories[x].Count == 0)
-                        Console.WriteLine(Categories[x] + "Category Finished Sorting...!");
+                        Console.WriteLine(Categories[x] + " category finished sorting...!");
+
+                    for (int i = 0; i < SortedIdx.Count; i++) //SortedIdx is a key
+                    {
+                        Console.WriteLine(items[SortedIdx[i]]);
+                    }
 
                     //OutFile = OutDir + sortingType[sortOpt]; HOW TO DO THE FOLDER FILE PATH THINGY
-                    using (StreamWriter sw = new StreamWriter(Categories[x] + ".txt", append)) //make a txt file 
-                    {
-                        foreach (KeyValuePair<int, List<string>> kvp in items)
-                        {
-                            
-                        }
-                    }
+                    //using (StreamWriter sw = new StreamWriter(Categories[x] + ".txt", append)) //make a txt file 
+                    //{
+                    //    for (int i = 0; i < SortedIdx.Count; i++)
+                    //    {
+                    //        foreach (KeyValuePair<int, List<string>> kvp in items)
+                    //        {
+                    //            if (SortedIdx[x] == kvp.Key)
+                    //            {
+                    //                sw.Write(kvp.Key + "--");
+                    //                foreach (string value in kvp.Value)
+                    //                {
+                    //                    sw.Write(value + "--");
+                    //                }
+                    //                sw.WriteLine();
+                    //            }
+                    //        }
+                    //    }
+                    //}
                 }
             }
 
